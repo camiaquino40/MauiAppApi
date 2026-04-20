@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApiApp.ViewModels"
+             x:Class="MauiApiApp.Views.DetailPage"
+             Title="Detalle del Post">
+
+    <ContentPage.BindingContext>
+        <vm:DetailViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,24" Spacing="16">
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="#0f3460"
+                               HorizontalOptions="Center" />
+
+            <Label Text="{Binding StatusMessage}"
+                   IsVisible="{Binding StatusMessage, Converter={StaticResource StringNotEmptyConverter}}"
+                   TextColor="#c0392b"
+                   FontSize="14"
+                   HorizontalOptions="Center" />
+
+            <VerticalStackLayout IsVisible="{Binding Post, Converter={StaticResource IsNotNullConverter}}"
+                                 Spacing="16">
+
+                <!-- ID del post -->
+                <Border Stroke="{AppThemeBinding Light=#0f3460, Dark=#4a7fd4}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="12,8"
+                        BackgroundColor="{AppThemeBinding Light=#eaf0fb, Dark=#1a2a3a}">
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Post ID: " FontAttributes="Bold"
+                                      TextColor="{AppThemeBinding Light=#0f3460, Dark=#4a7fd4}" />
+                                <Span Text="{Binding Post.Id}"
+                                      TextColor="{AppThemeBinding Light=#0f3460, Dark=#4a7fd4}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Border>
+
+                <!-- Título -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="TÍTULO"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#888, Dark=#aaa}"
+                           CharacterSpacing="1" />
+                    <Label Text="{Binding Post.Title}"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#1a1a2e, Dark=White}"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{AppThemeBinding Light=#e0e0e0, Dark=#444}" />
+
+                <!-- Contenido -->
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="CONTENIDO"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#888, Dark=#aaa}"
+                           CharacterSpacing="1" />
+                    <Label Text="{Binding Post.Body}"
+                           FontSize="15"
+                           TextColor="{AppThemeBinding Light=#333, Dark=#ddd}"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+
+                <BoxView HeightRequest="1"
+                         Color="{AppThemeBinding Light=#e0e0e0, Dark=#444}" />
+
+                <!-- Usuario -->
+                <Label FontSize="13"
+                       TextColor="{AppThemeBinding Light=#888, Dark=#aaa}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Publicado por el usuario #" />
+                            <Span Text="{Binding Post.UserId}" FontAttributes="Bold" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Button Text="← Volver a la lista"
+                        Command="{Binding GoBackCommand}"
+                        BackgroundColor="#0f3460"
+                        TextColor="White"
+                        CornerRadius="10"
+                        HeightRequest="46"
+                        Margin="0,8,0,0" />
+
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

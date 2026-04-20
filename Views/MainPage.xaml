@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:MauiApiApp.ViewModels"
+             xmlns:model="clr-namespace:MauiApiApp.Models"
+             x:Class="MauiApiApp.Views.MainPage"
+             Title="Posts">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="16" RowSpacing="12">
+
+        <Label Text="📋 Lista de Posts"
+       FontSize="22"
+       FontAttributes="Bold"
+       HorizontalOptions="Center"
+       TextColor="{AppThemeBinding Light=#1a1a2e, Dark=White}" />
+
+        <Button Grid.Row="1"
+                Text="🔄  Cargar Posts"
+                Command="{Binding LoadPostsCommand}"
+                BackgroundColor="#0f3460"
+                TextColor="White"
+                FontSize="15"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                HeightRequest="48" />
+
+        <VerticalStackLayout Grid.Row="2" Spacing="6" HorizontalOptions="Center">
+
+            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                               IsVisible="{Binding IsLoading}"
+                               Color="#0f3460"
+                               HeightRequest="32" />
+
+            <Label Text="{Binding StatusMessage}"
+                   TextColor="{Binding StatusColor}"
+                   FontSize="13"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding Posts}"
+                        SelectionMode="Single">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Post">
+                    <Border Stroke="{AppThemeBinding Light=#e0e0e0, Dark=#444}"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 10"
+                        Padding="14,10"
+                        Margin="0,4"
+                        BackgroundColor="{AppThemeBinding Light=White, Dark=#1e1e1e}">
+
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=GoToDetailCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding DisplayTitle}"
+                                FontAttributes="Bold"
+                                FontSize="14"
+                                TextColor="{AppThemeBinding Light=#1a1a2e, Dark=White}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="1" />
+                            <Label Text="{Binding Body}"
+                                FontSize="12"
+                                TextColor="{AppThemeBinding Light=#666, Dark=#aaa}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </Grid>
+</ContentPage>
