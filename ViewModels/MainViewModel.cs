@@ -9,11 +9,16 @@ using MauiApiApp.Services;
 
 namespace MauiApiApp.ViewModels
 {
-    
+
     public partial class MainViewModel : ObservableObject
     {
         // ─── servicio ──────────────────────────────────────────────────────────
-        private readonly ApiService _apiService = new();
+        private readonly IApiService _apiService;
+
+        public MainViewModel(IApiService apiService)
+        {
+            _apiService = apiService;
+        }
 
         // ─── propiedades observables ───────────────────────────────────────────
 
@@ -51,7 +56,7 @@ namespace MauiApiApp.ViewModels
             }
             catch (HttpRequestException ex) when (ex.StatusCode.HasValue)
             {
-                // error HTTP  
+                // error HTTP
                 int code = (int)ex.StatusCode!.Value;
                 StatusMessage = code switch
                 {

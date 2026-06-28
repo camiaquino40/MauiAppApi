@@ -3,23 +3,23 @@ using MauiApiApp.Models;
 
 namespace MauiApiApp.Services
 {
-    
-    public class ApiService
-    {
-      
-        private static readonly HttpClient _httpClient = new()
-        {
-            BaseAddress = new Uri("https://jsonplaceholder.typicode.com/"),
-            Timeout = TimeSpan.FromSeconds(10)
-        };
 
-        
+    public class ApiService : IApiService
+    {
+        private readonly HttpClient _httpClient;
+
+        public ApiService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+
         /// <exception cref="HttpRequestException">si hay problema de conexion o error HTTP</exception>
         public async Task<List<Post>> GetPostsAsync()
         {
             HttpResponseMessage response = await _httpClient.GetAsync("posts");
 
-            
+
             response.EnsureSuccessStatusCode();
 
             List<Post>? posts = await response.Content.ReadFromJsonAsync<List<Post>>();

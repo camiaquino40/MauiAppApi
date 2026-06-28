@@ -9,7 +9,12 @@ namespace MauiApiApp.ViewModels
     [QueryProperty(nameof(PostId), "postId")]
     public partial class DetailViewModel : ObservableObject
     {
-        private readonly ApiService _apiService = new();
+        private readonly IApiService _apiService;
+
+        public DetailViewModel(IApiService apiService)
+        {
+            _apiService = apiService;
+        }
 
         // ─── propiedades observables ───────────────────────────────────────────
 

@@ -4,9 +4,9 @@ namespace MauiApiApp.Views;
 
 public partial class DetailPage : ContentPage
 {
-    public DetailPage()
+    public DetailPage(DetailViewModel vm)
     {
         InitializeComponent();
-        BindingContext = new DetailViewModel();
+        BindingContext = vm;
     }
 }
