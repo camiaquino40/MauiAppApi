@@ -11,8 +11,7 @@ namespace MauiApiApp.Services
         {
             if (_db is not null) return;
 
-            // TODO: esto no funciona en todos los dispositivos, revisar
-            var dbPath = Path.Combine("/data/data/com.companyname.mauiapiapp", "favorites.db3");
+            var dbPath = Path.Combine(FileSystem.AppDataDirectory, "favorites.db3");
             _db = new SQLiteAsyncConnection(dbPath);
             await _db.CreateTableAsync<FavoritePost>();
         }
