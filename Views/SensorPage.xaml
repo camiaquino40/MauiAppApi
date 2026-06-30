@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApiApp.Views.SensorPage"
+             Title="Sensores">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- GPS -->
+            <Frame BorderColor="#3498db" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Ubicación (GPS)"
+                           FontSize="16" FontAttributes="Bold" TextColor="#3498db"/>
+                    <Label Text="{Binding Ubicacion}" FontSize="13"/>
+                    <Button Text="Obtener ubicación"
+                            Command="{Binding ObtenerUbicacionCommand}"
+                            BackgroundColor="#3498db" TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Acelerómetro -->
+            <Frame BorderColor="#27ae60" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Acelerómetro"
+                           FontSize="16" FontAttributes="Bold" TextColor="#27ae60"/>
+                    <Label Text="{Binding Acelerometro}" FontSize="13"/>
+                    <Button Text="{Binding TextoBotonAcelerometro}"
+                            Command="{Binding ToggleAcelerometroCommand}"
+                            BackgroundColor="#27ae60" TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Cámara -->
+            <Frame BorderColor="#8e44ad" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Cámara"
+                           FontSize="16" FontAttributes="Bold" TextColor="#8e44ad"/>
+                    <Label Text="{Binding EstadoCamara}" FontSize="13"/>
+                    <Button Text="Tomar foto"
+                            Command="{Binding TomarFotoCommand}"
+                            BackgroundColor="#8e44ad" TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Vibración -->
+            <Frame BorderColor="#e67e22" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Vibración"
+                           FontSize="16" FontAttributes="Bold" TextColor="#e67e22"/>
+                    <Button Text="Vibrar"
+                            Command="{Binding VibrarCommand}"
+                            BackgroundColor="#e67e22" TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

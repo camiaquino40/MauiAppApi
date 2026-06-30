@@ -24,11 +24,15 @@ public static class MauiProgram
             client.Timeout = TimeSpan.FromSeconds(10);
         });
 
+        builder.Services.AddSingleton<LocalDbService>();
+
         builder.Services.AddTransient<MainViewModel>();
         builder.Services.AddTransient<DetailViewModel>();
+        builder.Services.AddTransient<SensorViewModel>();
 
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<DetailPage>();
+        builder.Services.AddTransient<SensorPage>();
 
         return builder.Build();
     }
