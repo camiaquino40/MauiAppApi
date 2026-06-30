@@ -28,5 +28,11 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSCameraUsageDescription</key>
+	<string>La app necesita acceso a la cámara para tomar fotos desde la pantalla de sensores.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>La app necesita tu ubicación para mostrar las coordenadas GPS en tiempo real.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>La app necesita tu ubicación para mostrar las coordenadas GPS.</string>
 </dict>
 </plist>
