@@ -11,7 +11,9 @@ namespace MauiApiApp.Tests.Integration
 
         public InMemoryLocalDbService()
         {
-            _db = new SQLiteAsyncConnection(":memory:");
+            // nombre único por instancia para evitar que los tests paralelos compartan la db
+            var path = $"file:testdb{Guid.NewGuid():N}?mode=memory&cache=shared";
+            _db = new SQLiteAsyncConnection(path);
             _db.CreateTableAsync<FavoritePost>().Wait();
         }
 
